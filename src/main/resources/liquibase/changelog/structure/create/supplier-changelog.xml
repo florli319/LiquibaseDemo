@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="liquibase" id="create_table-supplier" context="Create Structure">
+        <comment>Creation supplier table</comment>
+        <createTable tableName="supplier">
+            <column name="id" type="int" remarks="Supplier id" autoIncrement="true">
+                <constraints nullable="false"
+                             primaryKey="true" primaryKeyName="id__supplier_pk"/>
+            </column>
+            <column name="identification" type="varchar2(20)" remarks="Supplier identification">
+                <constraints nullable="false"/>
+            </column>
+            <column name="identification_type" type="varchar2(10)" remarks="Identification type">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar2(100)" remarks="Supplier name">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar2(100)" remarks="Supplier lastname">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="varchar2(100)" remarks="Supplier address">
+                <constraints nullable="true"/>
+            </column>
+            <column name="phone" type="varchar2(10)" remarks="Supplier phone">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="supplier"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="liquibase" id="grant_table-supplier" context="Grant Permissions">
+        <preConditions onFail="CONTINUE">
+            <dbms type="oracle"/>
+        </preConditions>
+        <comment>Grant supplier permissions</comment>
+        <sql>
+            GRANT SELECT, INSERT, UPDATE, DELETE ON product TO ROLE_DB_USER
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

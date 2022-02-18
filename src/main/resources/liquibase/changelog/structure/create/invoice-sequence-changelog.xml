@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="liquibase" id="create_invoice_sequence" context="Create Structure">
+        <createSequence
+                cycle="true"
+                incrementBy="2"
+                maxValue="1000"
+                minValue="10"
+                ordered="true"
+                schemaName="public"
+                sequenceName="invoice_seq"
+                startValue="5"/>
+    </changeSet>
+
+
+</databaseChangeLog>

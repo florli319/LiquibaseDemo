@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
+    <changeSet author="liquibase" id="create_table-product" context="Create Structure">
+        <comment>Creation product table</comment>
+        <createTable tableName="product">
+            <column name="id" type="int" remarks="Product id" autoIncrement="true">
+                <constraints nullable="false"
+                    primaryKey="true" primaryKeyName="id__product_pk"/>
+            </column>
+            <column name="code" type="varchar2(20)" remarks="Product code">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar2(100)" remarks="Product name">
+                <constraints nullable="false"/>
+            </column>
+            <column name="stock" type="number(4)" remarks="Description">
+                <constraints nullable="true"/>
+            </column>
+            <column name="supplier_id" type="int" remarks="Related client id">
+                <constraints nullable="false"
+                             foreignKeyName="fk_product__supplier" referencedTableName="supplier"
+                             referencedColumnNames="id"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="product"/>
+        </rollback>
+    </changeSet>
+    
+    <changeSet author="liquibase" id="grant_table-product" context="Grant Permissions">
+        <preConditions onFail="CONTINUE">
+            <dbms type="oracle"/>
+        </preConditions>
+        <comment>Grant product permissions</comment>
+        <sql>
+            GRANT SELECT, INSERT, UPDATE, DELETE ON product TO ROLE_DB_USER
+        </sql>
+    </changeSet>
+    
+</databaseChangeLog>

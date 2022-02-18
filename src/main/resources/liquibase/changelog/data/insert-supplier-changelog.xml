@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
+    <!-- Matrix id -->
+    <property name="active_matrix_id" value="(SELECT id FROM matrix WHERE date_end IS null)"/>
+    <property name="closed_matrix_id" value="(SELECT id FROM matrix WHERE date_end IS NOT null)"/>
+    
+    <changeSet author="liquibase" id="insert-product-table" context="Insert product">
+        <comment>Products initial insertions</comment>
+        <insert tableName="product">
+            <column name="id" valueDate="1"/>
+            <column name="code" value="p1"/>
+            <column name="name" value="product1"/>
+            <column name="stock" value="3"/>
+        </insert>
+
+        <insert tableName="product">
+            <column name="id" valueDate="2"/>
+            <column name="code" value="p2"/>
+            <column name="name" value="product2"/>
+            <column name="stock" value="10"/>
+        </insert>
+    </changeSet>
+
+    
+</databaseChangeLog>

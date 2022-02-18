@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
+    <!-- Matrix id -->
+    <property name="active_matrix_id" value="(SELECT id FROM matrix WHERE date_end IS null)"/>
+    <property name="closed_matrix_id" value="(SELECT id FROM matrix WHERE date_end IS NOT null)"/>
+    
+    <changeSet author="liquibase" id="insert-product-table" context="Insert product">
+        <comment>Creación Matriz de prueba inicial</comment>
+        <insert tableName="product">
+            <column name="id" valueDate="1"/>
+            <column name="reference" value="ref1"/>
+            <column name="name" value="product1"/>
+            <column name="stock" value="3"/>
+        </insert>
+    </changeSet>
+    
+    <changeSet author="liquibase" id="update-active-matrix-test" context="Update Active Matrix" runInTransaction="true">
+        <comment>Cierre de Matriz activa y Alta de nueva matriz</comment>
+        <update tableName="matrix">
+            <column name="date_end" valueDate="2021-02-11"/>
+            <where>date_end IS null</where>
+        </update>
+        <insert tableName="matrix">
+            <column name="date_inI" valueDate="2021-02-12"/>
+            <column name="description" value="Matriz Inicial Febrero 2021"/>
+        </insert>
+    </changeSet>
+    
+</databaseChangeLog>

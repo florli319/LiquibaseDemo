@@ -1,0 +1,18 @@
+databaseChangeLog:
+  #####
+  # Create Structure
+  - include:
+      file: classpath:liquibase/changelog/structure/client-changelog.xml
+  - include:
+      file: classpath:liquibase/changelog/structure/invoce-changelog.xml
+  - include:
+      file: classpath:liquibase/changelog/structure/invoce-item-changelog.xml
+  - include:
+      file: classpath:liquibase/changelog/structure/product-changelog.xml
+  - include:
+      file: classpath:liquibase/changelog/structure/supplier-changelog.xml
+
+  #####
+  # Master Tables Load
+
+

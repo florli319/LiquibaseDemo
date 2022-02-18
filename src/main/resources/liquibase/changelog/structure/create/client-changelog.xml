@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
+    <changeSet author="liquibase" id="create_table-client" context="Create Structure">
+        <comment>Creation client table</comment>
+        <createTable tableName="client">
+            <column name="id" type="int" remarks="Client id" autoIncrement="true">
+                <constraints nullable="false"
+                    primaryKey="true" primaryKeyName="id__client_pk"/>
+            </column>
+            <column name="identification" type="varchar2(20)" remarks="Client identification">
+                <constraints nullable="false"/>
+            </column>
+            <column name="identification_type" type="varchar2(10)" remarks="Identification type">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar2(100)" remarks="Client name">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar2(100)" remarks="Client lastname">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="varchar2(100)" remarks="Client address">
+                <constraints nullable="true"/>
+            </column>
+            <column name="phone" type="varchar2(10)" remarks="Client phone">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="client"/>
+        </rollback>
+    </changeSet>
+    
+    <changeSet author="liquibase" id="grant_table-client" context="Grant Permissions">
+        <preConditions onFail="CONTINUE">
+            <dbms type="oracle"/>
+        </preConditions>
+        <comment>Grant client permissions</comment>
+        <sql>
+            GRANT SELECT, INSERT, UPDATE, DELETE ON client TO ROLE_DB_USER
+        </sql>
+    </changeSet>
+    
+</databaseChangeLog>

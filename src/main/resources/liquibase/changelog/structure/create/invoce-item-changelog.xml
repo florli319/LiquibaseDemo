@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
+    <changeSet author="liquibase" id="create_table-invoice_item" context="Create Structure">
+        <comment>Creation invoice item table</comment>
+        <createTable tableName="invoice_item">
+            <column name="id" type="int" remarks="Product id" autoIncrement="true">
+                <constraints nullable="false"
+                    primaryKey="true" primaryKeyName="id__invoice_item_pk"/>
+            </column>
+            <column name="invoice_id" type="int" remarks="Related invoice">
+                <constraints nullable="false"
+                             foreignKeyName="fk_invoice_item__invoice" referencedTableName="client"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="product_id" type="int" remarks="Related product id">
+                <constraints nullable="false"
+                             foreignKeyName="fk_invoice_item__product" referencedTableName="client"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="quantity" type="decimal" remarks="Quantity">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subtotal" type="decimal" remarks="Subtotal">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="invoice_item"/>
+        </rollback>
+    </changeSet>
+    
+    <changeSet author="liquibase" id="grant_table-invoice_item" context="Grant Permissions">
+        <preConditions onFail="CONTINUE">
+            <dbms type="oracle"/>
+        </preConditions>
+        <comment>Grant invoice_item permissions</comment>
+        <sql>
+            GRANT SELECT, INSERT, UPDATE, DELETE ON invoice_item TO ROLE_DB_USER
+        </sql>
+    </changeSet>
+    
+</databaseChangeLog>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
+    <!-- Matrix id -->
+    <property name="client1" value="(SELECT id FROM client WHERE identification ='L12345')"/>
+    <property name="client2" value="(SELECT id FROM client WHERE identification ='D00000')"/>
+
+
+    <changeSet author="liquibase" id="insert-invoice-table" context="Insert product">
+        <comment>Invoices initial insertions</comment>
+        <insert tableName="invoice">
+            <column name="id" valueDate="1"/>
+            <column name="code" value="INV1"/>
+            <column name="date" value="2022-01-25"/>
+            <column name="client_id"  valueComputed="${client1}"/>
+            <column name="total" value="100"/>
+        </insert>
+
+        <insert tableName="invoice">
+            <column name="id" valueDate="2"/>
+            <column name="code" value="INV2"/>
+            <column name="date" value="2022-01-31"/>
+            <column name="client_id"  valueComputed="${client2}"/>
+            <column name="total" value="70"/>
+        </insert>
+
+        <insert tableName="invoice">
+            <column name="id" valueDate="3"/>
+            <column name="code" value="INV3"/>
+            <column name="date" value="2022-02-02"/>
+            <column name="client_id"  valueComputed="${client1}"/>
+            <column name="total" value="160"/>
+        </insert>
+
+        <insert tableName="invoice">
+            <column name="id" valueDate="4"/>
+            <column name="code" value="INV4"/>
+            <column name="date" value="2022-02-10"/>
+            <column name="client_id"  valueComputed="${client1}"/>
+            <column name="total" value="250"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

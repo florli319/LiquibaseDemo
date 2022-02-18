@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
+    <!-- Matrix id -->
+    <property name="supplier1" value="(SELECT id FROM supplier WHERE id =1)"/>
+
+
+    <changeSet author="liquibase" id="insert-product-table" context="Insert product">
+        <comment>Products initial insertions</comment>
+        <insert tableName="product">
+            <column name="id" valueDate="1"/>
+            <column name="code" value="p1"/>
+            <column name="name" value="product1"/>
+            <column name="stock" value="3"/>
+            <column name="supplier_id" value="1"/>
+        </insert>
+
+        <insert tableName="product">
+            <column name="id" valueDate="2"/>
+            <column name="code" value="p2"/>
+            <column name="name" value="product2"/>
+            <column name="stock" value="10"/>
+            <column name="supplier_id" value="1"/>
+        </insert>
+
+        <insert tableName="product">
+            <column name="id" valueDate="3"/>
+            <column name="code" value="p3"/>
+            <column name="name" value="product3"/>
+            <column name="stock" value="7"/>
+            <column name="supplier_id" value="2"/>
+        </insert>
+    </changeSet>
+
+    
+</databaseChangeLog>

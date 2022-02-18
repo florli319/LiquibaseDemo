@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="liquibase" id="insert-client-table" context="Insert data">
+        <comment>Clients initial insertions</comment>
+        <insert tableName="client">
+            <column name="id" valueDate="1"/>
+            <column name="document_id" value="L12345"/>
+            <column name="document_type" value="DNI"/>
+            <column name="name" value="Client1"/>
+            <column name="last_name" value="LastName1"/>
+            <column name="address" value="address1"/>
+            <column name="phone" value="phone"/>
+        </insert>
+
+        <insert tableName="client">
+            <column name="id" valueDate="2"/>
+            <column name="document_id" value="D00000"/>
+            <column name="document_type" value="DNI"/>
+            <column name="name" value="Client2"/>
+            <column name="last_name" value="LastName2"/>
+            <column name="address" value="address2"/>
+            <column name="phone" value="phone"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>
